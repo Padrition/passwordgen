@@ -1,18 +1,29 @@
 use std::io;
 fn main() {
     //(1)ask for the length 
-    let mut pass_leng_str = String::new();
+    let length : u32;
 
-    println!("Enter the length of wannable password: ");
+    loop{
+        let mut pass_leng_str = String::new();
 
-    io::stdin()
-        .read_line(&mut pass_leng_str)
-        .expect("Faild to read the line");
+        println!("Enter the length of wannable password: ");
 
-    let pass_leng_str = pass_leng_str.trim();
-    
-    match pass_leng_str.parse::<u32>(){
-        Ok(i) => println!("{} is your password", i),
-        Err(..) => println!("Not a valid integer!"),
+        io::stdin()
+            .read_line(&mut pass_leng_str)
+            .expect("Faild to read the line");
+
+        let pass_leng_str = pass_leng_str.trim();
+
+        match pass_leng_str.parse::<u32>(){
+            Ok(i) => {
+                println!("{} is your password", i);
+                length = i;
+                break;
+            },
+            Err(..) => {
+                println!("Not a valid integer!"); 
+            },
+        }
     }
+    println!("{}", length);
 }

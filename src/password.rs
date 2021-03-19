@@ -19,10 +19,16 @@ pub static ASCII : [char; 69] = [
     '+','-','_','?','!','$','/',
 ];
 
-pub fn rand_pass(pass_len : u32)-> String{
+pub fn rand_pass(pass_len : u32, excluded : Vec<char>)-> String{
     let mut  password = String::new();
     for _i in 0..pass_len{
-        password.push(ASCII[xorshift::get_rand(69) as usize]);
+        let c : char = loop{
+            let c = ASCII[xorshift::get_rand(69) as usize];
+            if !excluded.contains(&c){
+                break c
+            }
+        };
+        password.push(c);
     }
 
     password

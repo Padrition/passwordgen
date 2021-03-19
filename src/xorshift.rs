@@ -1,7 +1,7 @@
 use std::time::UNIX_EPOCH;
 use std::time::SystemTime;
 
-pub fn get_rand() -> u32{
+pub fn get_rand(len : usize) -> usize{
     let now = SystemTime::now();
     let from_unix = now.duration_since(UNIX_EPOCH).expect("Congrats on time travel!");
     let seed = from_unix.as_micros();
@@ -9,13 +9,13 @@ pub fn get_rand() -> u32{
     let x = x ^ seed << 13;
     let x = x ^ x >>17;
     let x = x ^ x <<5;
-    return_last_digits_from_u128(x, 2)
+    return_last_digits_from_u128(x, len)
 }
 
-fn return_last_digits_from_u128 (x : u128 ,len : usize) -> u32{
+fn return_last_digits_from_u128 (x : u128 ,len : usize) -> usize{
     let s = x.to_string();
     let slice = &s[s.len()-len..s.len()];
     let str = String::from(slice);
     let x : u32= str.parse().unwrap();
-    x
+    x as usize
 }

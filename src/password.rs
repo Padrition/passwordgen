@@ -21,8 +21,8 @@ static ASCII : [char; 69] = [
 
 pub fn rand_pass(pass_len : u32)-> String{
     let mut  password = String::new();
-    for i in 0..pass_len{
-        password.push(ASCII[xorshift::get_rand(70) as usize]);
+    for _i in 0..pass_len{
+        password.push(ASCII[xorshift::get_rand(69) as usize]);
     }
     password
 }

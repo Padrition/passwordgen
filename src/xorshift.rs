@@ -10,5 +10,5 @@ pub fn get_rand(len : u128) -> u128{
     let x = x ^ x >>17;
     let x = x ^ x <<5;
     let x = x % len;
-    x
+    x as u128
 }

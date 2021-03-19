@@ -9,10 +9,7 @@ pub fn get_rand(len : usize) -> usize{
     let x = x ^ seed << 13;
     let x = x ^ x >>17;
     let x = x ^ x <<5;
-    return_last_digits_from_u128(x, len)
-}
 
-fn return_last_digits_from_u128 (x : u128 ,len : usize) -> usize{
     let s = x.to_string();
     let slice = &s[s.len()-len..s.len()];
     let str = String::from(slice);

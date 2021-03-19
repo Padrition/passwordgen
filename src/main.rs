@@ -1,4 +1,7 @@
 use std::io;
+
+mod xorshift;
+
 fn main() {
     //(1)ask for the length 
     let length : u32;

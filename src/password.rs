@@ -1,6 +1,6 @@
 use super::xorshift;
 
-static ASCII : [char; 69] = [
+pub static ASCII : [char; 69] = [
     'a', 'b', 'c', 'd', 'e', 
     'f', 'g', 'h', 'i', 'j', 
     'k', 'l', 'm', 'n', 'o',
@@ -24,5 +24,6 @@ pub fn rand_pass(pass_len : u32)-> String{
     for _i in 0..pass_len{
         password.push(ASCII[xorshift::get_rand(69) as usize]);
     }
+
     password
 }

@@ -6,6 +6,7 @@ mod password;
 fn main() {
 
     let length : u32;
+    let mut chars_to_exclude : Vec<char> = vec![];
 
     loop{
         let mut pass_leng_str = String::new();
@@ -28,6 +29,25 @@ fn main() {
             },
         }
     }
+    //todo: make it possible to exclude characters
+    //ask user a string of characters he would like to exdlude
+    println!("Enter the characters you want to exclude: ");
+
+    let mut exclude = String::new();
+
+    io::stdin()
+        .read_line(&mut exclude)
+        .expect("Faild to read the line");
+    
+    for i in 0..exclude.trim().len(){
+        let c = exclude.as_bytes()[i] as char;
+        chars_to_exclude.push(c);
+
+    }
+    println!("{:?}", chars_to_exclude);
+
+    //iterate random characters and do not include them into password if one matchs ones that excluded
+    
     println!("{}", password::rand_pass(length));
 
 }

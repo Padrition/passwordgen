@@ -1,4 +1,4 @@
-use super::xorshift;
+use super::time_rng;
 
 pub static ASCII: &[char] = &[
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -8,7 +8,7 @@ pub static ASCII: &[char] = &[
 ];
 
 pub fn rand_pass(pass_len: u32, excluded: &[char]) -> String {
-    std::iter::repeat_with(|| ASCII[xorshift::get_rand(ASCII.len() as u128) as usize])
+    std::iter::repeat_with(|| ASCII[time_rng::get_rand(ASCII.len() as u128) as usize])
         .filter(|letter| !excluded.contains(letter))
         .take(pass_len as usize)
         .collect()

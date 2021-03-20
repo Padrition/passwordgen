@@ -1,7 +1,7 @@
 use std::io;
 
 mod password;
-mod xorshift;
+mod time_rng;
 
 fn main() {
     let length: u32 = loop {

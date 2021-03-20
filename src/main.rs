@@ -7,7 +7,7 @@ fn main() {
     let length: u32 = loop {
         let mut pass_leng_str = String::new();
 
-        println!("Enter the length of wannable password: ");
+        eprintln!("Enter the length of wannable password: ");
 
         io::stdin()
             .read_line(&mut pass_leng_str)
@@ -16,7 +16,7 @@ fn main() {
         match pass_leng_str.trim().parse::<u32>() {
             Ok(i) => break i,
             Err(..) => {
-                println!("Not a valid integer!");
+                eprintln!("Not a valid integer!");
             }
         }
     };
@@ -24,7 +24,7 @@ fn main() {
     let exclude: Vec<char> = {
         let mut excl_chars = String::new();
 
-        println!("Write all characters you would like to exclude: ");
+        eprintln!("Write all characters you would like to exclude: ");
 
         io::stdin()
             .read_line(&mut excl_chars)

@@ -5,9 +5,7 @@ mod password;
 
 fn main() {
 
-    let length : u32;
-
-    loop{
+    let length : u32 = loop{
         let mut pass_leng_str = String::new();
 
         println!("Enter the length of wannable password: ");
@@ -18,17 +16,20 @@ fn main() {
 
         match pass_leng_str.trim().parse::<u32>(){
             Ok(i) => {
-                length = i;
-                break;
+                break i
             },
             Err(..) => {
                 println!("Not a valid integer!"); 
             },
         }
-    }
+    };
 
-    let mut excl_chars = String::new();
     let exclude : Vec<char> ={
+
+        let mut excl_chars = String::new();
+
+        println!("Write all characters you would like to exclude: ");
+
         io::stdin()
             .read_line(&mut excl_chars)
             .expect("Faild to read!");

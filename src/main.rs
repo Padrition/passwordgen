@@ -16,9 +16,7 @@ fn main() {
             .read_line(&mut pass_leng_str)
             .expect("Faild to read the line");
 
-        let pass_leng_str = pass_leng_str.trim();
-
-        match pass_leng_str.parse::<u32>(){
+        match pass_leng_str.trim().parse::<u32>(){
             Ok(i) => {
                 length = i;
                 break;
@@ -28,16 +26,16 @@ fn main() {
             },
         }
     }
-    println!("Enter the characters you want to exclude: ");
 
-    let mut exclude = String::new();
+    let mut excl_chars = String::new();
+    let exclude : Vec<char> ={
+        io::stdin()
+            .read_line(&mut excl_chars)
+            .expect("Faild to read!");
+        
+        excl_chars.trim().chars().collect::<Vec<_>>()
+    };
 
-    io::stdin()
-        .read_line(&mut exclude)
-        .expect("Faild to read the line");
-    
-    let excluded : Vec<char> = exclude.chars().collect();
-
-    println!("{}", password::rand_pass(length, excluded));
+    println!("{}", password::rand_pass(length, &exclude));
 
 }

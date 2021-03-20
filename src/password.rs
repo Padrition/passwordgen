@@ -1,6 +1,6 @@
 use super::xorshift;
 
-pub static ASCII : [char; 69] = [
+pub static ASCII : &[char] = &[
     'a', 'b', 'c', 'd', 'e', 
     'f', 'g', 'h', 'i', 'j', 
     'k', 'l', 'm', 'n', 'o',
@@ -19,17 +19,9 @@ pub static ASCII : [char; 69] = [
     '+','-','_','?','!','$','/',
 ];
 
-pub fn rand_pass(pass_len : u32, excluded : Vec<char>)-> String{
-    let mut  password = String::new();
-    for _i in 0..pass_len{
-        let c : char = loop{
-            let c = ASCII[xorshift::get_rand(69) as usize];
-            if !excluded.contains(&c){
-                break c
-            }
-        };
-        password.push(c);
-    }
-
-    password
+pub fn rand_pass(pass_len : u32, excluded : &[char])-> String{
+    std::iter::repeat_with(|| ASCII[xorshift::get_rand(ASCII.len() as u128) as usize])
+        .filter(|letter| !excluded.contains(letter))
+        .take(pass_len as usize)
+        .collect()
 }

@@ -3,7 +3,9 @@ use std::time::SystemTime;
 
 pub fn get_rand(len : u128) -> u128{
     let now = SystemTime::now();
-    let from_unix = now.duration_since(UNIX_EPOCH).expect("Congrats on time travel!");
+    let from_unix = now
+            .duration_since(UNIX_EPOCH)
+            .expect("Congrats on time travel!");
     let seed = from_unix.as_nanos();
     let x = seed;
     let x = x ^ seed << 13;

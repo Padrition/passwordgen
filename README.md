@@ -1,3 +1,5 @@
+![passwordgen](image.png)
+
 # passwordgen
 
 This is my simple implementation of a password generator with PRNG.

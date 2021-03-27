@@ -10,7 +10,7 @@ git clone https://github.com/Padrition/passwordgen.git
 ```
 
 ## Usage 
-* To run this programm you need to have a [rust compiler](#https://www.rust-lang.org/learn/get-started) installed.
+* To run this programm you need to have a [rust compiler](https://www.rust-lang.org/learn/get-started) installed.
 
 cd into the project folder 
 ```bash

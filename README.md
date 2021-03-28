@@ -6,7 +6,7 @@ This is my simple implementation of a password generator with PRNG.
 I implemented it with a custom PRNG that uses time as a seed.
 
 ## Instalation 
-To install it you need to clon this repository
+To install it you need to clone this repository
 ```bash
 git clone https://github.com/Padrition/passwordgen.git
 ```

@@ -1,37 +1,15 @@
-use std::io;
-
 mod password;
 mod time_rng;
 
+use password::Config;
+use std::env;
+use std::process;
+
 fn main() {
-    let length: u32 = loop {
-        let mut pass_leng_str = String::new();
+    let conf = Config::new(env::args()).unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments : {}", err);
+        process::exit(1);
+    });
 
-        eprintln!("Enter the length of wannable password: ");
-
-        io::stdin()
-            .read_line(&mut pass_leng_str)
-            .expect("Faild to read the line");
-
-        match pass_leng_str.trim().parse::<u32>() {
-            Ok(i) => break i,
-            Err(..) => {
-                eprintln!("Not a valid integer!");
-            }
-        }
-    };
-
-    let exclude: Vec<char> = {
-        let mut excl_chars = String::new();
-
-        eprintln!("Write all characters you would like to exclude: ");
-
-        io::stdin()
-            .read_line(&mut excl_chars)
-            .expect("Faild to read!");
-
-        excl_chars.trim().chars().collect::<Vec<_>>()
-    };
-
-    println!("{}", password::rand_pass(length, &exclude));
+    println!("{}", password::rand_pass(conf));
 }

@@ -1,10 +1,9 @@
 use super::time_rng;
 use std::env;
-use std::io;
 
-struct Config {
-    len : u32,
-    excluded : Vec<char>,
+pub struct Config {
+    pub len : u32,
+    pub excluded : Vec<char>,
 }
 impl Config{
     pub fn new(mut args: env::Args) -> Result<Config, &'static str>{
@@ -32,9 +31,9 @@ pub static ALLOWED_CHARS: &[char] = &[
     '6', '7', '8', '9', '0', '+', '-', '_', '?', '!', '$', '/',
 ];
 
-pub fn rand_pass(pass_len: u32, excluded: &[char]) -> String {
+pub fn rand_pass(config : Config) -> String {
     std::iter::repeat_with(|| ALLOWED_CHARS[time_rng::get_rand(ALLOWED_CHARS.len() as u128) as usize])
-        .filter(|letter| !excluded.contains(letter))
-        .take(pass_len as usize)
+        .filter(|letter| !config.excluded.contains(letter))
+        .take(config.len as usize)
         .collect()
 }

@@ -1,5 +1,30 @@
 use super::time_rng;
+use std::env;
+use std::io;
 
+struct Config {
+    len : u32,
+    excluded : Vec<char>,
+}
+impl Config{
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str>{
+        args.next();
+
+        let len = match args.next(){
+            Some(arg) => arg.trim().parse::<u32>().expect("Not a valid length"),
+            None => return Err("Password length wasn't specified")
+        };
+
+        let excluded = match args.next(){
+            Some(arg) => {
+                arg.trim().chars().collect::<Vec<_>>()
+            },
+            None => return Err("Excluded characters was not specified")
+        };
+
+        Ok(Config{len, excluded})
+    }
+}
 pub static ALLOWED_CHARS: &[char] = &[
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',

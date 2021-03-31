@@ -19,8 +19,8 @@ cd into the project folder
 cd passwordgen
 ```
 And run
-```bash
-cargo run
+```
+cargo run [password length] [excluded characters]
 ```
 
 You will be asked to enter the length of a password you want to be generated and characters you would like to exclude.
